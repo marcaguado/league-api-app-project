@@ -1,0 +1,27 @@
+<h1>League of Legends Summoner Stats</h1>
+
+<form method="POST" action="/"> 
+    <b>Summoner's Name:</b> <br>
+    <input type="text" name="user"/> <br>
+    <b>Server: </b> <br>
+    <select id="server" name="server">
+        <option value="br1">Brazil</option>
+        <option value="eun1">EU Nordic & East</option>
+        <option value="euw1">EU West</option>
+        <option value="la1">Latin America North</option>
+        <option value="la2">Latin America South</option>
+        <option value="na1">North America</option>
+        <option value="oc1">Oceania</option>
+        <option value="ru">Russia</option>
+        <option value="tr1">Turkey</option>
+        <option value="jp1">Japan</option>
+        <option value="kr">Korea</option>
+    </selec>
+    <input type="submit" value="Submit" />
+</form>
+
+<% if (it.username) { %>
+<img src="https://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/<%=it.iconId%>.png" height="50px" width="50px"/>
+<p>Summoner Name: <strong><%= it.username %></strong> </p>
+<p>Summoner Level: <strong><%= it.level %></strong></p>
+<% } %>
