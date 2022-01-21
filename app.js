@@ -18,10 +18,30 @@ const postContent = async ({render, request, response}) => {
     const riotAPIKey = "";
     const user = params.get("user");
     const server = params.get("server");
-    const link = `https://${server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${user}?api_key=${riotAPIKey}`;
-    const APIRequest = await fetch(link);
-    let data = await APIRequest.json();
-    render("main.eta", { username: data.name, level: data.summonerLevel, iconId: data.profileIconId});
+    const summonerInfoLink = `https://${server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${user}?api_key=${riotAPIKey}`;
+    const summonerInfoAPIRequest = await fetch(summonerInfoLink);
+    let summonerInfoData = await summonerInfoAPIRequest.json();
+    //console.log(summonerInfoData.id);
+    const summonerStatsLink = `https://${server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerInfoData.id}?api_key=${riotAPIKey}`;
+    const summonerStatsAPIRequest = await fetch(summonerStatsLink);
+    //console.log(summonerStatsAPIRequest);
+    let summonerStatsData = await summonerStatsAPIRequest.json();
+    //console.log(summonerStatsData);
+
+    if(summonerStatsData != 0) {
+        summonerStatsData = summonerStatsData[0];
+    }
+    
+    render("main.eta", { username: summonerInfoData.name, 
+        level: summonerInfoData.summonerLevel, 
+        iconId: summonerInfoData.profileIconId,
+        tier: summonerStatsData.tier,
+        rank: summonerStatsData.rank,
+        points: summonerStatsData.leaguePoints,
+        wins: summonerStatsData.wins,
+        losses: summonerStatsData.losses,
+        ratio: Math.round((summonerStatsData.wins / (summonerStatsData.losses + summonerStatsData.wins)) * 100) ,
+    });
 };
 
 router.get("/", showContent);

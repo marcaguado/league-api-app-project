@@ -5,9 +5,9 @@
     <input type="text" name="user"/> <br>
     <b>Server: </b> <br>
     <select id="server" name="server">
-        <option value="br1">Brazil</option>
-        <option value="eun1">EU Nordic & East</option>
         <option value="euw1">EU West</option>
+        <option value="eun1">EU Nordic & East</option>
+        <option value="br1">Brazil</option>        
         <option value="la1">Latin America North</option>
         <option value="la2">Latin America South</option>
         <option value="na1">North America</option>
@@ -24,4 +24,8 @@
 <img src="https://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/<%=it.iconId%>.png" height="50px" width="50px"/>
 <p>Summoner Name: <strong><%= it.username %></strong> </p>
 <p>Summoner Level: <strong><%= it.level %></strong></p>
+<p>Summoner Rank: <strong><%= it.tier %> <%= it.rank %> (<%= it.points %> LP)</strong></p>
+<p>Ranked Wins: <strong><%= it.wins %></strong></p>
+<p>Ranked Losses: <strong><%= it.losses %></strong></p>
+<p>Win Ratio: <strong><%= it.ratio %>%</strong></p>
 <% } %>
