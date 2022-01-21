@@ -1,31 +1,82 @@
-<h1>League of Legends Summoner Stats</h1>
-
-<form method="POST" action="/"> 
-    <b>Summoner's Name:</b> <br>
-    <input type="text" name="user"/> <br>
-    <b>Server: </b> <br>
-    <select id="server" name="server">
-        <option value="euw1">EU West</option>
-        <option value="eun1">EU Nordic & East</option>
-        <option value="br1">Brazil</option>        
-        <option value="la1">Latin America North</option>
-        <option value="la2">Latin America South</option>
-        <option value="na1">North America</option>
-        <option value="oc1">Oceania</option>
-        <option value="ru">Russia</option>
-        <option value="tr1">Turkey</option>
-        <option value="jp1">Japan</option>
-        <option value="kr">Korea</option>
-    </selec>
-    <input type="submit" value="Submit" />
-</form>
-
-<% if (it.username) { %>
-<img src="https://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/<%=it.iconId%>.png" height="50px" width="50px"/>
-<p>Summoner Name: <strong><%= it.username %></strong> </p>
-<p>Summoner Level: <strong><%= it.level %></strong></p>
-<p>Summoner Rank: <strong><%= it.tier %> <%= it.rank %> (<%= it.points %> LP)</strong></p>
-<p>Ranked Wins: <strong><%= it.wins %></strong></p>
-<p>Ranked Losses: <strong><%= it.losses %></strong></p>
-<p>Win Ratio: <strong><%= it.ratio %>%</strong></p>
-<% } %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LoL API</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  </head>
+  <body>
+  <br>
+  <div class="columns"> 
+    <div class="column"></div>
+    <div class="column">
+        <div class="box"> 
+            <h1 class="title">League of Legends Summoner Stats</h1>
+            <div class="container">
+                <form method="POST" action="/" id="summonerSearch">
+                    <div class="field">
+                        <label class="label">Summoner's Name:</label>
+                        <div class="control">
+                            <input class="input" type="text" name="user"/>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Server:</label>
+                        <div class="control">
+                            <div class="select">
+                                <select id="server" name="server">
+                                    <option value="euw1">EU West</option>
+                                    <option value="eun1">EU Nordic & East</option>
+                                    <option value="br1">Brazil</option>        
+                                    <option value="la1">Latin America North</option>
+                                    <option value="la2">Latin America South</option>
+                                    <option value="na1">North America</option>
+                                    <option value="oc1">Oceania</option>
+                                    <option value="ru">Russia</option>
+                                    <option value="tr1">Turkey</option>
+                                    <option value="jp1">Japan</option>
+                                    <option value="kr">Korea</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button form="summonerSearch" class="button is-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+            <% if (it.username) { %>
+                <div class="box">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64">
+                                <img src="https://ddragon.leagueoflegends.com/cdn/12.1.1/img/profileicon/<%=it.iconId%>.png" alt="Summoner Icon"/>
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <strong><%= it.username %></strong> <br>
+                                    Level: <strong><%= it.level %></strong><br>
+                                    Rank: <strong><%= it.tier %> <%= it.rank %> (<%= it.points %> LP)</strong><br>
+                                    Ranked Wins: <strong><%= it.wins %></strong><br>
+                                    Ranked Losses: <strong><%= it.losses %></strong><br>
+                                    Win Ratio: <strong><%= it.ratio %>%</strong>
+                                </p> 
+                            </div> 
+                        </div>
+                    </article>
+                </div> 
+            <% }%>
+    </div>
+    <div class="column"></div>
+  </div>
+    
+    </body>
+</html>
